@@ -34,3 +34,17 @@ func TestStrongEnough(t *testing.T) {
 		t.Errorf("want %t, got %t", want, got)
 	}
 }
+
+func TestCrack(t *testing.T) {
+	want := 99
+	check := func(guess int) bool {
+		return guess == want
+	}
+	nextTry := func(guess int) int {
+		return guess + 1
+	}
+	got := key.Crack(check, nextTry)
+	if want != got {
+		t.Errorf("want %d, got %d", want, got)
+	}
+}

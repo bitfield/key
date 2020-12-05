@@ -15,3 +15,16 @@ func MedianCrackTime(k string, tryRate uint64) uint64 {
 func StrongEnough(k string, tryRate uint64, minCrackTime uint64) bool {
 	return MedianCrackTime(k, tryRate) >= minCrackTime
 }
+
+type CheckFunc func(int) bool
+type NextTryFunc func (int) int
+
+func Crack(check CheckFunc, nextTry NextTryFunc) int {
+	guess := 0
+	for {
+		if check(guess) {
+			return guess
+		}
+		guess = nextTry(guess)
+	}
+}
